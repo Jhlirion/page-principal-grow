@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi página 3D</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    body { background: #000; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<script type="module">
+  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js'
 
+  const scene    = new THREE.Scene()
+  const camera   = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000)
+  const renderer = new THREE.WebGLRenderer({ antialias: true })
+
+  renderer.setSize(innerWidth, innerHeight)
+  renderer.setPixelRatio(devicePixelRatio)
+  document.body.appendChild(renderer.domElement)
+
+  const geometry = new THREE.TorusKnotGeometry(1, 0.3, 128, 32)
+  const material = new THREE.MeshStandardMaterial({
+    color: 0x6644ff,
+    roughness: 0.3,
+    metalness: 0.8
+  })
+  const mesh = new THREE.Mesh(geometry, material)
+  scene.add(mesh)
+
+  const light = new THREE.PointLight(0xffffff, 200)
+  light.position.set(5, 5, 5)
+  scene.add(light)
+  scene.add(new THREE.AmbientLight(0xffffff, 0.3))
+
+  camera.position.z = 5
+
+  const mouse = { x: 0, y: 0 }
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = (e.clientX / innerWidth  - 0.5) * 2
+    mouse.y = (e.clientY / innerHeight - 0.5) * 2
+  })
+
+  function animate() {
+    requestAnimationFrame(animate)
+    mesh.rotation.x += (mouse.y * 0.5 - mesh.rotation.x) * 0.05
+    mesh.rotation.y += (mouse.x * 0.5 - mesh.rotation.y) * 0.05
+    mesh.position.y  = Math.sin(Date.now() * 0.001) * 0.3
+    renderer.render(scene, camera)
+  }
+  animate()
+
+  window.addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight
+    camera.updateProjectionMatrix()
+    renderer.setSize(innerWidth, innerHeight)
+  })
+</script>
+</body>
+</html>
