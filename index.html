@@ -21,6 +21,7 @@
   renderer.setPixelRatio(devicePixelRatio)
   document.body.appendChild(renderer.domElement)
 
+  // — Objeto principal —
   const geometry = new THREE.TorusKnotGeometry(1, 0.3, 128, 32)
   const material = new THREE.MeshStandardMaterial({
     color: 0x6644ff,
@@ -30,24 +31,55 @@
   const mesh = new THREE.Mesh(geometry, material)
   scene.add(mesh)
 
-  const light = new THREE.PointLight(0xffffff, 200)
-  light.position.set(5, 5, 5)
-  scene.add(light)
-  scene.add(new THREE.AmbientLight(0xffffff, 0.3))
+  // — Partículas / estrellas —
+  const count     = 6000
+  const positions = new Float32Array(count * 3)
+  for (let i = 0; i < count * 3; i++)
+    positions[i] = (Math.random() - 0.5) * 40
+
+  const starGeo = new THREE.BufferGeometry()
+  starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+  const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.07 })
+  const stars   = new THREE.Points(starGeo, starMat)
+  scene.add(stars)
+
+  // — Luces —
+  const light1 = new THREE.PointLight(0x6644ff, 300)
+  light1.position.set(5, 5, 5)
+  scene.add(light1)
+
+  const light2 = new THREE.PointLight(0xff44aa, 150)
+  light2.position.set(-5, -3, 3)
+  scene.add(light2)
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.2))
 
   camera.position.z = 5
 
+  // — Mouse —
   const mouse = { x: 0, y: 0 }
   window.addEventListener('mousemove', (e) => {
     mouse.x = (e.clientX / innerWidth  - 0.5) * 2
     mouse.y = (e.clientY / innerHeight - 0.5) * 2
   })
 
+  // — Clic cambia color —
+  window.addEventListener('click', () => {
+    mesh.material.color.setHex(Math.random() * 0xffffff)
+    light1.color.setHex(Math.random() * 0xffffff)
+  })
+
+  // — Animación —
   function animate() {
     requestAnimationFrame(animate)
+
     mesh.rotation.x += (mouse.y * 0.5 - mesh.rotation.x) * 0.05
     mesh.rotation.y += (mouse.x * 0.5 - mesh.rotation.y) * 0.05
     mesh.position.y  = Math.sin(Date.now() * 0.001) * 0.3
+
+    stars.rotation.y += 0.0003
+    stars.rotation.x += 0.0001
+
     renderer.render(scene, camera)
   }
   animate()
