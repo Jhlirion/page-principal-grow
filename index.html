@@ -2,93 +2,740 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mi página 3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexoIA | Marketing Digital y Automatización con IA en Lima, Perú</title>
+  <meta name="description" content="Agencia de marketing digital y automatización con IA en Lima. Webs, publicidad y procesos automatizados para pymes. Resultados desde el primer mes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; }
-    body { background: #000; overflow: hidden; }
-    canvas { display: block; }
+    :root {
+      --ink: #0E0E0C;
+      --teal: #1D9E75;
+      --teal-light: rgba(29,158,117,0.12);
+      --teal-border: rgba(29,158,117,0.4);
+      --cream: #FDFCF9;
+      --mist: #E8E4D9;
+      --sand: #F5F2EB;
+      --gray: #6B6860;
+      --white: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: var(--cream); color: var(--ink); line-height: 1.65; font-size: 16px; }
+
+    /* ——— NAVBAR ——— */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(253,252,249,0.82); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--mist);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+    }
+    .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; color: var(--ink); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--teal); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 400; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .btn-nav {
+      background: var(--ink); color: var(--white); border: none; border-radius: 50px;
+      padding: 10px 22px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: background 0.2s, transform 0.2s; text-decoration: none;
+    }
+    .btn-nav:hover { background: var(--teal); transform: translateY(-1px); }
+
+    /* ——— BOTONES ——— */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--ink); color: var(--white); border: none; border-radius: 50px;
+      padding: 14px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: background 0.2s, transform 0.2s; text-decoration: none;
+    }
+    .btn-primary:hover { background: var(--teal); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent; color: var(--ink); border: 1.5px solid var(--ink); border-radius: 50px;
+      padding: 13px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: border-color 0.2s, transform 0.2s; text-decoration: none;
+    }
+    .btn-secondary:hover { border-color: var(--ink); transform: translateY(-2px); }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--white); color: var(--ink); border: none; border-radius: 50px;
+      padding: 14px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: transform 0.2s; text-decoration: none;
+    }
+    .btn-white:hover { transform: translateY(-2px); }
+    .btn-ghost-white {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.5); border-radius: 50px;
+      padding: 13px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: border-color 0.2s, transform 0.2s; text-decoration: none;
+    }
+    .btn-ghost-white:hover { border-color: var(--white); transform: translateY(-2px); }
+
+    /* ——— HERO ——— */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 120px 48px 80px;
+      background: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(29,158,117,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--gray);
+      background: var(--sand); border: 1px solid var(--mist);
+      padding: 6px 14px; border-radius: 50px; margin-bottom: 28px;
+    }
+    .eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--teal); border-radius: 50%; }
+    h1.display {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(44px, 6vw, 68px); line-height: 1.05;
+      letter-spacing: -2px; color: var(--ink);
+      margin-bottom: 24px; max-width: 760px;
+    }
+    h1.display em { font-style: normal; color: var(--teal); }
+    .hero-sub {
+      font-size: 17px; font-weight: 300; color: var(--gray);
+      max-width: 520px; line-height: 1.7; margin-bottom: 40px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
+    .hero-stats { display: flex; gap: 48px; flex-wrap: wrap; }
+    .stat { display: flex; flex-direction: column; gap: 4px; }
+    .stat-num {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 13px;
+      color: var(--teal); letter-spacing: -0.3px;
+    }
+    .stat-label { font-size: 12px; color: var(--gray); max-width: 160px; line-height: 1.4; }
+    .stat-divider { width: 1px; background: var(--mist); align-self: stretch; }
+
+    /* ——— SECCIONES ——— */
+    section { padding: 96px 48px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header { margin-bottom: 64px; }
+    .section-header .eyebrow { margin-bottom: 16px; }
+    h2.section-title {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: clamp(28px, 4vw, 46px); letter-spacing: -1.5px;
+      color: var(--ink); margin-bottom: 16px; line-height: 1.1;
+    }
+    .section-sub { font-size: 16px; color: var(--gray); max-width: 480px; }
+
+    /* ——— SERVICIOS ——— */
+    #servicios { background: var(--cream); }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .card-service {
+      background: var(--cream); border: 1px solid var(--mist);
+      border-radius: 10px; padding: 36px 32px;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      position: relative; overflow: hidden; cursor: default;
+    }
+    .card-service::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--teal); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .card-service:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(14,14,12,0.08); border-color: var(--teal-border); }
+    .card-service:hover::before { transform: scaleX(1); }
+    .card-num { font-size: 11px; font-weight: 700; color: var(--gray); letter-spacing: 0.1em; margin-bottom: 20px; }
+    .card-icon { width: 48px; height: 48px; background: var(--sand); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 20px; }
+    h3.card-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 21px; letter-spacing: -0.5px; margin-bottom: 12px; }
+    .card-desc { font-size: 15px; color: var(--gray); line-height: 1.65; margin-bottom: 28px; }
+    .card-features { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+    .card-features li { font-size: 14px; color: var(--gray); display: flex; align-items: center; gap: 8px; }
+    .card-features li::before { content: ''; width: 5px; height: 5px; background: var(--teal); border-radius: 50%; flex-shrink: 0; }
+    .card-price {
+      border-top: 1px solid var(--mist); padding-top: 20px; margin-top: auto;
+      display: flex; align-items: baseline; gap: 4px;
+    }
+    .price-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px; }
+    .price-label { font-size: 13px; color: var(--gray); }
+
+    /* ——— PROCESO ——— */
+    #proceso { background: var(--sand); }
+    .proceso-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; position: relative; }
+    .proceso-grid::before {
+      content: ''; position: absolute; top: 31px; left: 80px; right: 80px; height: 2px;
+      background: var(--mist); z-index: 0;
+    }
+    .paso { position: relative; z-index: 1; }
+    .paso-num {
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 2px solid var(--mist); background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: var(--teal);
+      margin-bottom: 24px; transition: background 0.2s, color 0.2s;
+    }
+    .paso:hover .paso-num { background: var(--teal); color: var(--white); border-color: var(--teal); }
+    .paso-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 16px; margin-bottom: 10px; letter-spacing: -0.3px; }
+    .paso-desc { font-size: 14px; color: var(--gray); line-height: 1.65; }
+
+    /* ——— RESULTADOS ——— */
+    #resultados { background: var(--ink); }
+    #resultados .section-header .eyebrow { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
+    #resultados h2.section-title { color: var(--white); }
+    #resultados .section-sub { color: rgba(255,255,255,0.45); }
+    .metricas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .metrica-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 40px 36px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .metrica-card:hover { background: rgba(29,158,117,0.12); border-color: rgba(29,158,117,0.4); }
+    .metrica-num {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 52px;
+      color: var(--teal); letter-spacing: -2px; line-height: 1; margin-bottom: 12px;
+    }
+    .metrica-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+    .metrica-desc { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+    /* ——— PLANES ——— */
+    #planes { background: var(--cream); }
+    .planes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+    .plan-card {
+      background: var(--cream); border: 1px solid var(--mist);
+      border-radius: 14px; padding: 40px 32px; position: relative;
+    }
+    .plan-card.featured { background: var(--ink); border-color: var(--ink); }
+    .plan-card.featured * { color: var(--white) !important; }
+    .plan-card.featured .plan-feature::before { background: var(--teal) !important; }
+    .plan-card.featured .plan-price-num { color: var(--teal) !important; }
+    .plan-card.featured .btn-primary { background: var(--teal); }
+    .plan-card.featured .plan-divider { border-color: rgba(255,255,255,0.12) !important; }
+    .badge-popular {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--teal); color: var(--white);
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 5px 16px; border-radius: 50px; white-space: nowrap;
+    }
+    .plan-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.4px; margin-bottom: 8px; }
+    .plan-tagline { font-size: 14px; color: var(--gray); margin-bottom: 28px; line-height: 1.5; }
+    .plan-price { margin-bottom: 28px; }
+    .plan-desde { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray); margin-bottom: 6px; }
+    .plan-price-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 42px; letter-spacing: -2px; color: var(--ink); line-height: 1; }
+    .plan-price-mes { font-size: 14px; color: var(--gray); }
+    .plan-divider { border: none; border-top: 1px solid var(--mist); margin: 24px 0; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .plan-feature { font-size: 14px; color: var(--gray); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+    .plan-feature::before { content: ''; width: 5px; height: 5px; background: var(--teal); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+
+    /* ——— CTA FINAL ——— */
+    #cta { background: var(--teal); padding: 96px 48px; }
+    #cta .section-inner { text-align: center; }
+    #cta h2 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(28px,4vw,46px); color: var(--white); letter-spacing: -1.5px; margin-bottom: 16px; line-height: 1.1; }
+    #cta p { font-size: 17px; color: rgba(255,255,255,0.75); max-width: 480px; margin: 0 auto 40px; }
+    #cta .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ——— CONTACTO ——— */
+    #contacto { background: var(--sand); }
+    .contacto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); }
+    .form-group input, .form-group select, .form-group textarea {
+      border: 1.5px solid var(--mist); border-radius: 8px;
+      padding: 13px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px;
+      background: var(--white); color: var(--ink); outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #B4B2A9; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(29,158,117,0.15);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; }
+    .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+    .contact-icon { width: 44px; height: 44px; background: var(--white); border: 1px solid var(--mist); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .contact-item-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+    .contact-item-val { font-size: 14px; color: var(--gray); }
+
+    /* ——— FOOTER ——— */
+    footer {
+      background: var(--ink); padding: 48px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;
+    }
+    .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: var(--white); }
+    .footer-logo span { color: var(--teal); }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+    /* ——— NOSOTROS ——— */
+    #nosotros { background: var(--white); }
+    .nosotros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .valores-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .valor { background: var(--sand); border-radius: 10px; padding: 20px; }
+    .valor-icon { font-size: 22px; margin-bottom: 8px; }
+    .valor-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+    .valor-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
+    .diferenciadores { display: flex; flex-direction: column; gap: 16px; }
+    .dif-item { display: flex; gap: 16px; align-items: flex-start; }
+    .dif-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 32px; color: var(--teal); line-height: 1; flex-shrink: 0; min-width: 40px; }
+    .dif-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+    .dif-desc { font-size: 14px; color: var(--gray); line-height: 1.5; }
+
+    /* ——— FAQ ——— */
+    #faq { background: var(--sand); }
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+    .faq-item { border-bottom: 1px solid var(--mist); }
+    .faq-question {
+      width: 100%; background: none; border: none; text-align: left;
+      padding: 22px 0; font-family: 'Syne', sans-serif; font-weight: 600;
+      font-size: 16px; color: var(--ink); cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .faq-chevron { font-size: 18px; color: var(--teal); flex-shrink: 0; transition: transform 0.2s; }
+    .faq-item.open .faq-chevron { transform: rotate(45deg); }
+    .faq-answer { font-size: 15px; color: var(--gray); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
+    .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 20px; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      nav .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .hero { padding: 100px 24px 72px; }
+      .cards-grid, .planes-grid, .metricas-grid, .proceso-grid { grid-template-columns: 1fr; }
+      .nosotros-grid, .contacto-grid { grid-template-columns: 1fr; gap: 40px; }
+      .proceso-grid::before { display: none; }
+      footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+      #cta { padding: 72px 24px; }
+    }
   </style>
 </head>
 <body>
-<script type="module">
-  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js'
 
-  const scene    = new THREE.Scene()
-  const camera   = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000)
-  const renderer = new THREE.WebGLRenderer({ antialias: true })
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="logo">Nexo<span>IA</span></a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="btn-nav">Agendar llamada →</a>
+</nav>
 
-  renderer.setSize(innerWidth, innerHeight)
-  renderer.setPixelRatio(devicePixelRatio)
-  document.body.appendChild(renderer.domElement)
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-inner">
+    <div class="eyebrow">Agencia de crecimiento con IA — Lima, Perú</div>
+    <h1 class="display">Hacemos crecer tu negocio<br>con <em>inteligencia</em></h1>
+    <p class="hero-sub">Marketing digital, automatización con IA y páginas web que convierten. Todo en una sola corporación, con resultados medibles desde el primer mes.</p>
+    <div class="hero-ctas">
+      <a href="#contacto" class="btn-primary">Quiero crecer ahora →</a>
+      <a href="#servicios" class="btn-secondary">Ver servicios</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">+96%</span>
+        <span class="stat-label">de pymes peruanas necesitan digitalización</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">3x más ventas</span>
+        <span class="stat-label">con automatización IA</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">48 horas</span>
+        <span class="stat-label">para tener tu web funcionando</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // — Objeto principal —
-  const geometry = new THREE.TorusKnotGeometry(1, 0.3, 128, 32)
-  const material = new THREE.MeshStandardMaterial({
-    color: 0x6644ff,
-    roughness: 0.3,
-    metalness: 0.8
-  })
-  const mesh = new THREE.Mesh(geometry, material)
-  scene.add(mesh)
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Lo que hacemos</div>
+      <h2 class="section-title">Tres servicios, un ecosistema</h2>
+      <p class="section-sub">Diseñados para trabajar juntos y escalar tu negocio en cada etapa de crecimiento.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card-service">
+        <div class="card-num">01</div>
+        <div class="card-icon">🌐</div>
+        <h3 class="card-title">Web con IA en 48 horas</h3>
+        <p class="card-desc">Presencia profesional inmediata. Tu web diseñada con inteligencia artificial, optimizada para ventas y lista para escalar.</p>
+        <ul class="card-features">
+          <li>Diseño personalizado con IA</li>
+          <li>Optimizado para Google (SEO)</li>
+          <li>Formularios y WhatsApp integrados</li>
+          <li>Hosting y dominio incluido</li>
+          <li>Entrega en 48 horas</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-num">Desde S/990</span>
+          <span class="price-label">&nbsp;pago único</span>
+        </div>
+      </div>
+      <div class="card-service">
+        <div class="card-num">02</div>
+        <div class="card-icon">📈</div>
+        <h3 class="card-title">Agencia de crecimiento IA</h3>
+        <p class="card-desc">Estrategia completa de marketing digital potenciada con IA. Más clientes, más ventas, con reportes en tiempo real.</p>
+        <ul class="card-features">
+          <li>Gestión de Meta y Google Ads</li>
+          <li>Contenido generado con IA</li>
+          <li>Dashboard de resultados 24/7</li>
+          <li>Automatización de leads</li>
+          <li>Reunión mensual incluida</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-num">Desde S/1,490</span>
+          <span class="price-label">&nbsp;/mes</span>
+        </div>
+      </div>
+      <div class="card-service">
+        <div class="card-num">03</div>
+        <div class="card-icon">⚙️</div>
+        <h3 class="card-title">Automatización enterprise</h3>
+        <p class="card-desc">Conectamos, automatizamos y optimizamos los procesos de tu empresa con IA. Reduce costos y escala sin contratar más.</p>
+        <ul class="card-features">
+          <li>Auditoría de procesos gratis</li>
+          <li>Flujos n8n y Make personalizados</li>
+          <li>Integración con tu CRM</li>
+          <li>Soporte técnico mensual</li>
+          <li>Ahorro medible desde mes 1</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-num">A medida</span>
+          <span class="price-label">&nbsp;— cotización gratis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // — Partículas / estrellas —
-  const count     = 6000
-  const positions = new Float32Array(count * 3)
-  for (let i = 0; i < count * 3; i++)
-    positions[i] = (Math.random() - 0.5) * 40
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Cómo trabajamos</div>
+      <h2 class="section-title">Del primer contacto a resultados reales</h2>
+      <p class="section-sub">Un proceso claro, sin tecnicismos. Sabemos que tu tiempo vale.</p>
+    </div>
+    <div class="proceso-grid">
+      <div class="paso">
+        <div class="paso-num">1</div>
+        <div class="paso-title">Diagnóstico gratuito</div>
+        <p class="paso-desc">Analizamos tu negocio, sector y competencia. Sin costo, sin compromiso. En 30 min sabes exactamente qué necesitas.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">2</div>
+        <div class="paso-title">Propuesta a medida</div>
+        <p class="paso-desc">Diseñamos un plan específico para tu industria con metas claras, timeline definido y precio transparente.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">3</div>
+        <div class="paso-title">Implementación ágil</div>
+        <p class="paso-desc">Tu web en 48h, tu campaña en una semana. Iteramos con datos reales, no suposiciones.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">4</div>
+        <div class="paso-title">Seguimiento continuo</div>
+        <p class="paso-desc">Dashboard en tiempo real, reporte mensual y reunión de optimización incluidos en cada plan.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  const starGeo = new THREE.BufferGeometry()
-  starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-  const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.07 })
-  const stars   = new THREE.Points(starGeo, starMat)
-  scene.add(stars)
+<!-- RESULTADOS -->
+<section id="resultados">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Resultados / Números</div>
+      <h2 class="section-title">Los números hablan solos</h2>
+      <p class="section-sub">Datos reales de nuestros clientes activos en Lima.</p>
+    </div>
+    <div class="metricas-grid">
+      <div class="metrica-card">
+        <div class="metrica-num">+340%</div>
+        <div class="metrica-title">Aumento en consultas web</div>
+        <p class="metrica-desc">Clientes con web profesional vs. sin presencia digital activa.</p>
+      </div>
+      <div class="metrica-card">
+        <div class="metrica-num">-60%</div>
+        <div class="metrica-title">Tiempo en tareas manuales</div>
+        <p class="metrica-desc">Reducción de horas en procesos repetitivos con automatización IA.</p>
+      </div>
+      <div class="metrica-card">
+        <div class="metrica-num">2.8x</div>
+        <div class="metrica-title">Retorno sobre inversión</div>
+        <p class="metrica-desc">ROI promedio en campañas de marketing con seguimiento y optimización.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // — Luces —
-  const light1 = new THREE.PointLight(0x6644ff, 300)
-  light1.position.set(5, 5, 5)
-  scene.add(light1)
+<!-- PLANES -->
+<section id="planes">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Planes y Precios</div>
+      <h2 class="section-title">Elige tu punto de partida</h2>
+      <p class="section-sub">Sin letra chica. Sin costos ocultos. Cancela cuando quieras.</p>
+    </div>
+    <div class="planes-grid">
+      <div class="plan-card">
+        <div class="plan-name">Esencial</div>
+        <p class="plan-tagline">Para pymes que quieren presencia digital profesional desde hoy.</p>
+        <div class="plan-price">
+          <div class="plan-desde">Desde</div>
+          <div class="plan-price-num">S/990</div>
+          <div class="plan-price-mes">pago único</div>
+        </div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li class="plan-feature">Web con IA en 48 horas</li>
+          <li class="plan-feature">Diseño personalizado</li>
+          <li class="plan-feature">SEO básico incluido</li>
+          <li class="plan-feature">WhatsApp y formulario</li>
+          <li class="plan-feature">1 mes de soporte técnico</li>
+        </ul>
+        <a href="#contacto" class="btn-secondary" style="width:100%; justify-content:center;">Empezar →</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="badge-popular">Más popular</div>
+        <div class="plan-name">Crecimiento</div>
+        <p class="plan-tagline">Marketing digital completo con IA para escalar tus ventas.</p>
+        <div class="plan-price">
+          <div class="plan-desde">Desde</div>
+          <div class="plan-price-num" style="color:var(--teal)">S/1,490</div>
+          <div class="plan-price-mes">/mes</div>
+        </div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li class="plan-feature">Web + campañas Meta & Google</li>
+          <li class="plan-feature">Contenido IA semanal</li>
+          <li class="plan-feature">Dashboard en tiempo real</li>
+          <li class="plan-feature">Automatización de leads</li>
+          <li class="plan-feature">Reunión mensual incluida</li>
+          <li class="plan-feature">Soporte prioritario</li>
+        </ul>
+        <a href="#contacto" class="btn-primary" style="width:100%; justify-content:center; background:var(--teal);">Quiero crecer →</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Enterprise</div>
+        <p class="plan-tagline">Automatización total para empresas que quieren escalar sin límites.</p>
+        <div class="plan-price">
+          <div class="plan-desde">Desde</div>
+          <div class="plan-price-num">A medida</div>
+        </div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li class="plan-feature">Todo lo de Crecimiento</li>
+          <li class="plan-feature">Automatización de procesos</li>
+          <li class="plan-feature">Integraciones con CRM/ERP</li>
+          <li class="plan-feature">Agentes IA personalizados</li>
+          <li class="plan-feature">SLA y soporte dedicado</li>
+          <li class="plan-feature">Consultor asignado</li>
+        </ul>
+        <a href="#contacto" class="btn-secondary" style="width:100%; justify-content:center;">Hablar con un asesor →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  const light2 = new THREE.PointLight(0xff44aa, 150)
-  light2.position.set(-5, -3, 3)
-  scene.add(light2)
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="section-inner">
+    <div class="nosotros-grid">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px">Quiénes somos</div>
+        <h2 class="section-title">Ejecutivos que hablan tu idioma</h2>
+        <p style="font-size:16px;color:var(--gray);line-height:1.7;margin-bottom:24px">
+          NexoIA nació en Lima con una misión clara: que las pymes peruanas puedan competir con las grandes usando las mismas herramientas de inteligencia artificial. Sin tecnicismos, sin promesas vacías.
+        </p>
+        <p style="font-size:16px;color:var(--gray);line-height:1.7">
+          Somos un equipo de estrategas de marketing, desarrolladores y especialistas en IA que entienden el mercado local y saben cómo generar resultados medibles desde el primer mes.
+        </p>
+        <div class="valores-grid">
+          <div class="valor"><div class="valor-icon">🎯</div><div class="valor-title">Orientados a resultados</div><div class="valor-desc">Cada acción tiene una métrica. No hacemos cosas por hacerlas.</div></div>
+          <div class="valor"><div class="valor-icon">🔍</div><div class="valor-title">Transparencia total</div><div class="valor-desc">Dashboard en vivo. Ves todo lo que hacemos y lo que cuesta.</div></div>
+          <div class="valor"><div class="valor-icon">⚡</div><div class="valor-title">Velocidad real</div><div class="valor-desc">48h para entregar. No semanas de reuniones sin avance.</div></div>
+          <div class="valor"><div class="valor-icon">🤝</div><div class="valor-title">Socios, no proveedores</div><div class="valor-desc">Tu éxito es el nuestro. Alineamos incentivos desde el día 1.</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:24px">Por qué NexoIA</div>
+        <div class="diferenciadores">
+          <div class="dif-item">
+            <div class="dif-num">01</div>
+            <div><div class="dif-title">IA real, no buzzwords</div><div class="dif-desc">Usamos modelos de IA en producción, no solo en el PowerPoint de ventas.</div></div>
+          </div>
+          <div class="dif-item">
+            <div class="dif-num">02</div>
+            <div><div class="dif-title">Resultados en días, no meses</div><div class="dif-desc">Web en 48h, primera campaña en una semana. El tiempo de tu negocio vale.</div></div>
+          </div>
+          <div class="dif-item">
+            <div class="dif-num">03</div>
+            <div><div class="dif-title">Especialistas en el mercado peruano</div><div class="dif-desc">Conocemos a tu competencia, a tu cliente y cómo se mueve Lima.</div></div>
+          </div>
+          <div class="dif-item">
+            <div class="dif-num">04</div>
+            <div><div class="dif-title">Sin contratos trampa</div><div class="dif-desc">Mensual, sin permanencia mínima. Nos ganamos tu continuidad cada mes.</div></div>
+          </div>
+          <div class="dif-item">
+            <div class="dif-num">05</div>
+            <div><div class="dif-title">Precio transparente desde el inicio</div><div class="dif-desc">Lo que cotizamos es lo que pagas. Sin sorpresas al tercer mes.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.2))
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-header" style="text-align:center">
+      <div class="eyebrow" style="margin:0 auto 16px">Preguntas frecuentes</div>
+      <h2 class="section-title">Resolvemos tus dudas</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Realmente entregan la web en 48 horas? <span class="faq-chevron">+</span></button>
+        <div class="faq-answer">Sí, siempre que tengamos la información de tu negocio lista. Al confirmar el proyecto te enviamos un formulario de onboarding. Con eso en mano, tu web está lista en 48 horas hábiles.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Cuánto tengo que invertir en publicidad además del plan? <span class="faq-chevron">+</span></button>
+        <div class="faq-answer">Eso depende de tus metas. Recomendamos mínimo S/600-S/800/mes en pauta para ver resultados consistentes. Te ayudamos a definir el presupuesto según tu industria y objetivos en la llamada de diagnóstico.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Puedo cancelar en cualquier momento? <span class="faq-chevron">+</span></button>
+        <div class="faq-answer">Sí. Trabajamos mensualmente sin permanencia mínima. Solo necesitamos 15 días de aviso para cerrar el servicio ordenadamente y entregarte todos tus activos digitales.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Trabajan con cualquier tipo de negocio? <span class="faq-chevron">+</span></button>
+        <div class="faq-answer">Trabajamos mejor con restaurantes, clínicas, retail, consultorios, estudios y servicios profesionales. Si tienes un negocio distinto, en la llamada de diagnóstico te decimos honestamente si podemos ayudarte.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Qué pasa si no veo resultados en el primer mes? <span class="faq-chevron">+</span></button>
+        <div class="faq-answer">Hacemos una reunión de revisión al mes 1 y ajustamos la estrategia sin costo adicional. Si al mes 2 seguimos sin tener resultados claros, te devolvemos el mes y cerramos sin problema.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Necesito saber de marketing o tecnología para trabajar con ustedes? <span class="faq-chevron">+</span></button>
+        <div class="faq-answer">Para nada. Tú te concentras en atender a tus clientes. Nosotros manejamos todo lo digital: la web, las campañas, los reportes y las optimizaciones. Sin tecnicismos en las reuniones.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  camera.position.z = 5
+<!-- CTA FINAL -->
+<section id="cta">
+  <div class="section-inner">
+    <h2>¿Listo para que tu negocio crezca con IA?</h2>
+    <p>Agenda una llamada gratuita de 30 minutos. Sin compromiso. Te decimos exactamente qué necesitas y cuánto cuesta.</p>
+    <div class="cta-btns">
+      <a href="#contacto" class="btn-white">Agendar llamada gratuita →</a>
+      <a href="https://wa.me/51999999999" target="_blank" class="btn-ghost-white">💬 WhatsApp directo</a>
+    </div>
+  </div>
+</section>
 
-  // — Mouse —
-  const mouse = { x: 0, y: 0 }
-  window.addEventListener('mousemove', (e) => {
-    mouse.x = (e.clientX / innerWidth  - 0.5) * 2
-    mouse.y = (e.clientY / innerHeight - 0.5) * 2
-  })
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Contacto</div>
+      <h2 class="section-title">Hablemos de tu negocio</h2>
+      <p class="section-sub">Sin formularios que se pierden. Te respondemos en menos de 2 horas.</p>
+    </div>
+    <div class="contacto-grid">
+      <form onsubmit="return false;">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label>Empresa / Negocio</label>
+          <input type="text" placeholder="Nombre de tu empresa">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp / Teléfono</label>
+          <input type="tel" placeholder="+51 999 999 999">
+        </div>
+        <div class="form-group">
+          <label>Servicio de interés</label>
+          <select>
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option>Web Esencial — 48 horas</option>
+            <option>Crecimiento IA — Marketing digital</option>
+            <option>Enterprise — Automatización</option>
+            <option>Consulta general</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Cuéntanos de tu negocio</label>
+          <textarea placeholder="¿Qué vendes? ¿Cuál es tu principal reto hoy?"></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Enviar consulta →</button>
+      </form>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-item-title">WhatsApp</div>
+            <div class="contact-item-val">+51 999 999 999<br>Respuesta en menos de 1 hora</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-item-title">Email</div>
+            <div class="contact-item-val">hola@nexoia.pe<br>Respuesta el mismo día</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-title">Ubicación</div>
+            <div class="contact-item-val">Lima, Perú<br>Atendemos a todo el país de forma remota</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-item-title">Horario de atención</div>
+            <div class="contact-item-val">Lunes a viernes: 9am – 7pm<br>Sábados: 9am – 1pm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // — Clic cambia color —
-  window.addEventListener('click', () => {
-    mesh.material.color.setHex(Math.random() * 0xffffff)
-    light1.color.setHex(Math.random() * 0xffffff)
-  })
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Nexo<span>IA</span></div>
+  <ul class="footer-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 NexoIA · Lima, Perú · Todos los derechos reservados</div>
+</footer>
 
-  // — Animación —
-  function animate() {
-    requestAnimationFrame(animate)
-
-    mesh.rotation.x += (mouse.y * 0.5 - mesh.rotation.x) * 0.05
-    mesh.rotation.y += (mouse.x * 0.5 - mesh.rotation.y) * 0.05
-    mesh.position.y  = Math.sin(Date.now() * 0.001) * 0.3
-
-    stars.rotation.y += 0.0003
-    stars.rotation.x += 0.0001
-
-    renderer.render(scene, camera)
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
   }
-  animate()
-
-  window.addEventListener('resize', () => {
-    camera.aspect = innerWidth / innerHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(innerWidth, innerHeight)
-  })
 </script>
 </body>
 </html>
