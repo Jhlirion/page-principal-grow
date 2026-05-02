@@ -3,24 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YourGrowPartnerIA | Marketing Digital y Automatización con IA en Lima, Perú</title>
-  <meta name="description" content="Agencia de marketing digital y automatización con IA en Lima. Webs, publicidad y procesos automatizados para pymes. Resultados desde el primer mes.">
 
-  <!-- Google Fonts -->
+  <!-- ═══ SEO PRIMARIO ═══ -->
+  <title>NexoIA | Agencia de Marketing Digital con IA en Lima, Perú</title>
+  <meta name="description" content="Agencia de marketing digital y automatización con IA en Lima, Perú. Páginas web en 48h, campañas con IA y automatización de procesos para pymes. Resultados medibles desde el primer mes.">
+  <meta name="keywords" content="marketing digital Lima, agencia IA Peru, automatización empresas Lima, páginas web Lima, marketing digital pymes Peru, inteligencia artificial empresas">
+  <meta name="author" content="NexoIA">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://nexoia.vercel.app/">
+
+  <!-- ═══ OPEN GRAPH (WhatsApp, Facebook, LinkedIn) ═══ -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://nexoia.vercel.app/">
+  <meta property="og:title"       content="NexoIA | Marketing Digital con IA en Lima, Perú">
+  <meta property="og:description" content="Hacemos crecer tu negocio con inteligencia. Web en 48h, marketing digital y automatización con IA para pymes peruanas.">
+  <meta property="og:image"       content="https://nexoia.vercel.app/images/og-image.jpg">
+  <meta property="og:locale"      content="es_PE">
+
+  <!-- ═══ TWITTER CARD ═══ -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="NexoIA | Marketing Digital con IA en Lima">
+  <meta name="twitter:description" content="Hacemos crecer tu negocio con inteligencia. Web en 48h, marketing digital y automatización con IA.">
+  <meta name="twitter:image"       content="https://nexoia.vercel.app/images/og-image.jpg">
+
+  <!-- ═══ GEO / LOCAL SEO ═══ -->
+  <meta name="geo.region"      content="PE-LIM">
+  <meta name="geo.placename"   content="Lima, Perú">
+  <meta name="geo.position"    content="-12.0464;-77.0428">
+  <meta name="ICBM"            content="-12.0464, -77.0428">
+
+  <!-- ═══ SCHEMA.ORG — LocalBusiness ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MarketingAgency",
+    "name": "NexoIA",
+    "description": "Agencia de marketing digital y automatización con inteligencia artificial en Lima, Perú.",
+    "url": "https://nexoia.vercel.app",
+    "logo": "https://nexoia.vercel.app/images/logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lima",
+      "addressRegion": "Lima",
+      "addressCountry": "PE"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+51-999-999-999",
+      "contactType": "customer service",
+      "availableLanguage": "Spanish"
+    },
+    "sameAs": [
+      "https://www.instagram.com/nexoia",
+      "https://www.linkedin.com/company/nexoia"
+    ],
+    "offers": [
+      { "@type": "Offer", "name": "Web con IA en 48 horas", "price": "990", "priceCurrency": "PEN" },
+      { "@type": "Offer", "name": "Agencia de crecimiento IA", "price": "1490", "priceCurrency": "PEN" }
+    ]
+  }
+  </script>
+
+  <!-- ═══ FAVICON ═══ -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23080809'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='900' font-size='18' fill='%2300E5A0'>N</text></svg>">
+
+  <!-- ═══ FUENTES ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 
-  <!-- Estilos -->
+  <!-- ═══ ESTILOS ═══ -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <!-- ═══════════════════════════════════════
+     CANVAS PARTÍCULAS (fondo del hero)
+     ═══════════════════════════════════════ -->
+<canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.6"></canvas>
+
+
+<!-- ═══════════════════════════════════════
      NAVBAR
      ═══════════════════════════════════════ -->
 <nav id="navbar">
-  <a href="#inicio" class="logo">YourGrowPartner<span>IA</span></a>
-  <ul class="nav-links">
+  <a href="#inicio" class="logo" aria-label="NexoIA — Inicio">Nexo<span>IA</span></a>
+  <ul class="nav-links" role="navigation" aria-label="Menú principal">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#proceso">Proceso</a></li>
     <li><a href="#planes">Planes</a></li>
@@ -34,76 +102,116 @@
 <!-- ═══════════════════════════════════════
      HERO
      ═══════════════════════════════════════ -->
-<section class="hero" id="inicio">
+<section class="hero" id="inicio" aria-label="Sección principal">
+  <div class="hero-inner">
 
-  <div class="hero-content">
-    <div class="eyebrow reveal">Agencia de crecimiento con IA — Lima, Perú</div>
+    <div class="hero-content">
+      <div class="hero-tag reveal">
+        <span class="hero-tag-dot"></span>
+        Agencia de crecimiento · Lima, Perú
+      </div>
 
-    <h1 class="display reveal reveal-delay-1">
-      Hacemos crecer<br>tu negocio con<br><em>inteligencia</em>
-    </h1>
+      <h1 class="display reveal reveal-delay-1">
+        Hacemos crecer<br>
+        tu negocio con<br>
+        <em id="typewriter">inteligencia</em>
+      </h1>
 
-    <p class="hero-sub reveal reveal-delay-2">
-      Marketing digital, automatización con IA y páginas web que convierten.
-      Todo en una sola corporación, con resultados medibles desde el primer mes.
-    </p>
+      <p class="hero-sub reveal reveal-delay-2">
+        Marketing digital, automatización con IA y páginas web que convierten.
+        Todo en una sola corporación, con resultados medibles desde el primer mes.
+      </p>
 
-    <div class="hero-ctas reveal reveal-delay-3">
-      <a href="#contacto" class="btn-primary">Quiero crecer ahora →</a>
-      <a href="#servicios" class="btn-secondary">Ver servicios</a>
+      <div class="hero-ctas reveal reveal-delay-3">
+        <a href="#contacto" class="btn-primary">Quiero crecer ahora →</a>
+        <a href="#servicios" class="btn-secondary">Ver servicios</a>
+      </div>
+
+      <div class="hero-stats reveal reveal-delay-4">
+        <div class="stat">
+          <div class="stat-num">+96%</div>
+          <div class="stat-label">pymes peruanas necesitan digitalización</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3x ventas</div>
+          <div class="stat-label">con automatización IA</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">48 horas</div>
+          <div class="stat-label">para tener tu web lista</div>
+        </div>
+      </div>
     </div>
 
-    <div class="hero-stats reveal reveal-delay-4">
-      <div class="stat">
-        <div class="stat-num">+96%</div>
-        <div class="stat-label">pymes peruanas necesitan digitalización</div>
+    <!-- Columna visual derecha
+         Foto: cambia src por images/hero.jpg cuando tengas foto propia -->
+    <div class="hero-visual reveal reveal-delay-2">
+      <div class="hero-img-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=85&auto=format&fit=crop"
+          alt="Inteligencia artificial aplicada a negocios en Lima"
+          loading="eager">
       </div>
-      <div class="stat">
-        <div class="stat-num">3x ventas</div>
-        <div class="stat-label">con automatización IA</div>
+      <div class="hero-card">
+        <div class="hero-card-label">ROI promedio</div>
+        <div class="hero-card-val">2.8x</div>
+        <div class="hero-card-sub">en campañas con IA</div>
       </div>
-      <div class="stat">
-        <div class="stat-num">48 horas</div>
-        <div class="stat-label">para tener tu web lista</div>
+      <div class="hero-card-2">
+        <div class="badge-live">
+          <span class="badge-live-dot"></span>
+          Dashboard en vivo
+        </div>
+        <div class="hero-card-2-num">+340%</div>
+        <div class="hero-card-2-label">consultas web</div>
       </div>
     </div>
+
   </div>
-
-  <!-- FOTO HERO
-       Para cambiar: sube tu foto a images/hero.jpg
-       y reemplaza el src de abajo -->
-  <div class="hero-image-col">
-    <img
-      src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80&auto=format&fit=crop"
-      alt="Equipo YourGrowPartnerIA trabajando con tecnología">
-
-    <!-- Tarjeta flotante animada -->
-    <div class="hero-accent">
-      <div class="hero-accent-label">ROI promedio</div>
-      <div class="hero-accent-val">2.8x</div>
-    </div>
-  </div>
-
 </section>
+
+
+<!-- ═══════════════════════════════════════
+     BARRA DE TECNOLOGÍAS
+     ═══════════════════════════════════════ -->
+<div class="tech-bar" aria-label="Tecnologías que usamos">
+  <div class="tech-bar-inner">
+    <span class="tech-bar-label">Tecnologías</span>
+    <div class="tech-logos">
+      <span class="tech-logo">Claude AI</span>
+      <span class="tech-logo">Meta Ads</span>
+      <span class="tech-logo">Google Ads</span>
+      <span class="tech-logo">n8n</span>
+      <span class="tech-logo">Make.com</span>
+      <span class="tech-logo">Framer</span>
+      <span class="tech-logo">Looker Studio</span>
+      <span class="tech-logo">Manychat</span>
+      <span class="tech-logo">HubSpot</span>
+    </div>
+  </div>
+</div>
 
 
 <!-- ═══════════════════════════════════════
      SERVICIOS
      ═══════════════════════════════════════ -->
-<section id="servicios">
+<section id="servicios" aria-labelledby="servicios-title">
   <div class="section-inner">
-
     <div class="section-header">
       <div class="eyebrow reveal">Lo que hacemos</div>
-      <h2 class="section-title reveal reveal-delay-1">Tres servicios,<br>un ecosistema</h2>
-      <p class="section-sub reveal reveal-delay-2">Diseñados para trabajar juntos y escalar tu negocio en cada etapa de crecimiento.</p>
+      <h2 class="section-title reveal reveal-delay-1" id="servicios-title">
+        Tres servicios,<br>un ecosistema
+      </h2>
+      <p class="section-sub reveal reveal-delay-2">
+        Diseñados para trabajar juntos y escalar tu negocio en cada etapa de crecimiento.
+      </p>
     </div>
 
     <div class="cards-grid">
 
-      <div class="card-service reveal reveal-delay-1">
+      <article class="card-service reveal reveal-delay-1">
         <div class="card-num">01</div>
-        <div class="card-icon">🌐</div>
+        <div class="card-icon" aria-hidden="true">🌐</div>
         <h3 class="card-title">Web con IA en 48 horas</h3>
         <p class="card-desc">Presencia profesional inmediata. Tu web diseñada con inteligencia artificial, optimizada para ventas y lista para escalar.</p>
         <ul class="card-features">
@@ -117,11 +225,11 @@
           <span class="price-num">Desde S/990</span>
           <span class="price-label">&nbsp;pago único</span>
         </div>
-      </div>
+      </article>
 
-      <div class="card-service reveal reveal-delay-2">
+      <article class="card-service reveal reveal-delay-2">
         <div class="card-num">02</div>
-        <div class="card-icon">📈</div>
+        <div class="card-icon" aria-hidden="true">📈</div>
         <h3 class="card-title">Agencia de crecimiento IA</h3>
         <p class="card-desc">Estrategia completa de marketing digital potenciada con IA. Más clientes, más ventas, con reportes en tiempo real.</p>
         <ul class="card-features">
@@ -135,11 +243,11 @@
           <span class="price-num">Desde S/1,490</span>
           <span class="price-label">&nbsp;/mes</span>
         </div>
-      </div>
+      </article>
 
-      <div class="card-service reveal reveal-delay-3">
+      <article class="card-service reveal reveal-delay-3">
         <div class="card-num">03</div>
-        <div class="card-icon">⚙️</div>
+        <div class="card-icon" aria-hidden="true">⚙️</div>
         <h3 class="card-title">Automatización enterprise</h3>
         <p class="card-desc">Conectamos, automatizamos y optimizamos los procesos de tu empresa con IA. Reduce costos y escala sin contratar más.</p>
         <ul class="card-features">
@@ -153,22 +261,20 @@
           <span class="price-num">A medida</span>
           <span class="price-label">&nbsp;— cotización gratis</span>
         </div>
-      </div>
+      </article>
 
     </div>
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════════
-     BANNER 1
-     Para cambiar foto: sube images/banner1.jpg
-     y reemplaza el src de abajo
-     ═══════════════════════════════════════ -->
+<!-- BANNER 1
+     Foto: cambia src por images/banner1.jpg cuando tengas foto propia -->
 <div class="img-banner reveal">
   <img
-    src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=1600&q=80&auto=format&fit=crop"
-    alt="Equipo en oficina moderna Lima">
+    src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1600&q=85&auto=format&fit=crop"
+    alt="Inteligencia artificial transformando empresas en Lima"
+    loading="lazy">
   <div class="img-banner-overlay">
     <div class="img-banner-text">
       "En 48 horas tienes tu web funcionando.<br>
@@ -182,38 +288,39 @@
 <!-- ═══════════════════════════════════════
      PROCESO
      ═══════════════════════════════════════ -->
-<section id="proceso">
+<section id="proceso" aria-labelledby="proceso-title">
   <div class="section-inner">
-
     <div class="section-header">
       <div class="eyebrow reveal">Cómo trabajamos</div>
-      <h2 class="section-title reveal reveal-delay-1">Del primer contacto<br>a resultados reales</h2>
-      <p class="section-sub reveal reveal-delay-2">Un proceso claro, sin tecnicismos. Sabemos que tu tiempo vale.</p>
+      <h2 class="section-title reveal reveal-delay-1" id="proceso-title">
+        Del primer contacto<br>a resultados reales
+      </h2>
+      <p class="section-sub reveal reveal-delay-2">
+        Un proceso claro, sin tecnicismos. Sabemos que tu tiempo vale.
+      </p>
     </div>
-
     <div class="proceso-grid">
       <div class="paso reveal reveal-delay-1">
-        <div class="paso-num">1</div>
-        <div class="paso-title">Diagnóstico gratuito</div>
+        <div class="paso-num" aria-hidden="true">1</div>
+        <h3 class="paso-title">Diagnóstico gratuito</h3>
         <p class="paso-desc">Analizamos tu negocio, sector y competencia. Sin costo, sin compromiso. En 30 min sabes exactamente qué necesitas.</p>
       </div>
       <div class="paso reveal reveal-delay-2">
-        <div class="paso-num">2</div>
-        <div class="paso-title">Propuesta a medida</div>
+        <div class="paso-num" aria-hidden="true">2</div>
+        <h3 class="paso-title">Propuesta a medida</h3>
         <p class="paso-desc">Diseñamos un plan específico para tu industria con metas claras, timeline definido y precio transparente.</p>
       </div>
       <div class="paso reveal reveal-delay-3">
-        <div class="paso-num">3</div>
-        <div class="paso-title">Implementación ágil</div>
+        <div class="paso-num" aria-hidden="true">3</div>
+        <h3 class="paso-title">Implementación ágil</h3>
         <p class="paso-desc">Tu web en 48h, tu campaña en una semana. Iteramos con datos reales, no suposiciones.</p>
       </div>
       <div class="paso reveal reveal-delay-4">
-        <div class="paso-num">4</div>
-        <div class="paso-title">Seguimiento continuo</div>
+        <div class="paso-num" aria-hidden="true">4</div>
+        <h3 class="paso-title">Seguimiento continuo</h3>
         <p class="paso-desc">Dashboard en tiempo real, reporte mensual y reunión de optimización incluidos en cada plan.</p>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -221,33 +328,34 @@
 <!-- ═══════════════════════════════════════
      RESULTADOS
      ═══════════════════════════════════════ -->
-<section id="resultados">
+<section id="resultados" aria-labelledby="resultados-title">
   <div class="section-inner">
-
     <div class="section-header">
       <div class="eyebrow reveal">Resultados</div>
-      <h2 class="section-title reveal reveal-delay-1">Los números<br>hablan solos</h2>
-      <p class="section-sub reveal reveal-delay-2">Datos reales de nuestros clientes activos en Lima.</p>
+      <h2 class="section-title reveal reveal-delay-1" id="resultados-title">
+        Los números<br>hablan solos
+      </h2>
+      <p class="section-sub reveal reveal-delay-2">
+        Datos reales de nuestros clientes activos en Lima.
+      </p>
     </div>
-
     <div class="metricas-grid">
       <div class="metrica-card reveal reveal-delay-1">
         <div class="metrica-num">+340%</div>
-        <div class="metrica-title">Aumento en consultas web</div>
+        <h3 class="metrica-title">Aumento en consultas web</h3>
         <p class="metrica-desc">Clientes con web profesional vs. sin presencia digital activa.</p>
       </div>
       <div class="metrica-card reveal reveal-delay-2">
         <div class="metrica-num">-60%</div>
-        <div class="metrica-title">Tiempo en tareas manuales</div>
+        <h3 class="metrica-title">Tiempo en tareas manuales</h3>
         <p class="metrica-desc">Reducción de horas en procesos repetitivos con automatización IA.</p>
       </div>
       <div class="metrica-card reveal reveal-delay-3">
         <div class="metrica-num">2.8x</div>
-        <div class="metrica-title">Retorno sobre inversión</div>
+        <h3 class="metrica-title">Retorno sobre inversión</h3>
         <p class="metrica-desc">ROI promedio en campañas de marketing con seguimiento y optimización.</p>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -255,13 +363,16 @@
 <!-- ═══════════════════════════════════════
      PLANES
      ═══════════════════════════════════════ -->
-<section id="planes">
+<section id="planes" aria-labelledby="planes-title">
   <div class="section-inner">
-
     <div class="section-header">
       <div class="eyebrow reveal">Planes y Precios</div>
-      <h2 class="section-title reveal reveal-delay-1">Elige tu punto<br>de partida</h2>
-      <p class="section-sub reveal reveal-delay-2">Sin letra chica. Sin costos ocultos. Cancela cuando quieras.</p>
+      <h2 class="section-title reveal reveal-delay-1" id="planes-title">
+        Elige tu punto<br>de partida
+      </h2>
+      <p class="section-sub reveal reveal-delay-2">
+        Sin letra chica. Sin costos ocultos. Cancela cuando quieras.
+      </p>
     </div>
 
     <div class="planes-grid">
@@ -299,14 +410,14 @@
           <li class="plan-feature">Reunión mensual incluida</li>
           <li class="plan-feature">Soporte prioritario</li>
         </ul>
-        <a href="#contacto" class="btn-primary" style="width:100%;justify-content:center;background:var(--teal);">Quiero crecer →</a>
+        <a href="#contacto" class="btn-primary" style="width:100%;justify-content:center;">Quiero crecer →</a>
       </div>
 
       <div class="plan-card reveal reveal-delay-3">
         <div class="plan-name">Enterprise</div>
         <p class="plan-tagline">Automatización total para empresas que quieren escalar sin límites.</p>
         <div class="plan-desde">Precio</div>
-        <div class="plan-price-num" style="font-size:32px">A medida</div>
+        <div class="plan-price-num" style="font-size:32px;letter-spacing:-1px">A medida</div>
         <div class="plan-price-mes">según tu negocio</div>
         <hr class="plan-divider">
         <ul class="plan-features">
@@ -328,27 +439,26 @@
 <!-- ═══════════════════════════════════════
      NOSOTROS
      ═══════════════════════════════════════ -->
-<section id="nosotros">
+<section id="nosotros" aria-labelledby="nosotros-title">
   <div class="section-inner">
 
     <div class="nosotros-grid">
-
-      <!-- FOTO EQUIPO
-           Para cambiar: sube images/equipo.jpg
-           y reemplaza el src de abajo -->
+      <!-- Foto equipo: cambia src por images/equipo.jpg -->
       <div class="nosotros-img reveal">
         <img
-          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&auto=format&fit=crop"
-          alt="Equipo YourGrowPartnerIA Lima">
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=85&auto=format&fit=crop"
+          alt="Equipo NexoIA en Lima, Perú"
+          loading="lazy">
       </div>
-
       <div>
         <div class="eyebrow reveal">Quiénes somos</div>
-        <h2 class="section-title reveal reveal-delay-1">Ejecutivos que<br>hablan tu idioma</h2>
-        <p class="reveal reveal-delay-2" style="font-size:15.5px;color:var(--gray);line-height:1.75;margin-bottom:18px">
-          YourGrowPartnerIA nació en Lima con una misión clara: que las pymes peruanas puedan competir con las grandes usando las mismas herramientas de inteligencia artificial. Sin tecnicismos, sin promesas vacías.
+        <h2 class="section-title reveal reveal-delay-1" id="nosotros-title">
+          Ejecutivos que<br>hablan tu idioma
+        </h2>
+        <p class="reveal reveal-delay-2" style="font-size:15.5px;color:var(--text-2);line-height:1.75;margin-bottom:16px">
+          NexoIA nació en Lima con una misión clara: que las pymes peruanas puedan competir con las grandes usando las mismas herramientas de inteligencia artificial. Sin tecnicismos, sin promesas vacías.
         </p>
-        <p class="reveal reveal-delay-3" style="font-size:15.5px;color:var(--gray);line-height:1.75">
+        <p class="reveal reveal-delay-3" style="font-size:15.5px;color:var(--text-2);line-height:1.75">
           Somos estrategas de marketing, desarrolladores y especialistas en IA que entienden el mercado local y saben generar resultados medibles desde el primer mes.
         </p>
         <div class="valores-grid">
@@ -360,9 +470,8 @@
       </div>
     </div>
 
-    <!-- Diferenciadores -->
     <div style="margin-top:80px">
-      <div class="eyebrow reveal" style="margin-bottom:8px">Por qué YourGrowPartnerIA</div>
+      <div class="eyebrow reveal" style="margin-bottom:8px">Por qué NexoIA</div>
       <div class="diferenciadores">
         <div class="dif-item reveal reveal-delay-1"><div class="dif-num">01</div><div><div class="dif-title">IA real, no buzzwords</div><div class="dif-desc">Usamos modelos de IA en producción, no solo en el PowerPoint de ventas.</div></div></div>
         <div class="dif-item reveal reveal-delay-2"><div class="dif-num">02</div><div><div class="dif-title">Resultados en días, no meses</div><div class="dif-desc">Web en 48h, primera campaña en una semana. El tiempo de tu negocio vale.</div></div></div>
@@ -376,18 +485,16 @@
 </section>
 
 
-<!-- ═══════════════════════════════════════
-     BANNER 2
-     Para cambiar foto: sube images/banner2.jpg
-     y reemplaza el src de abajo
-     ═══════════════════════════════════════ -->
+<!-- BANNER 2
+     Foto: cambia src por images/banner2.jpg -->
 <div class="img-banner reveal">
   <img
-    src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1600&q=80&auto=format&fit=crop"
-    alt="Marketing digital Lima Peru">
+    src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600&q=85&auto=format&fit=crop"
+    alt="Crecimiento digital de empresas peruanas con IA"
+    loading="lazy">
   <div class="img-banner-overlay">
     <div class="img-banner-text">
-      Más de <em>50 empresas limeñas</em> ya crecen con YourGrowPartnerIA.<br>
+      Más de <em>50 empresas limeñas</em> ya crecen con NexoIA.<br>
       ¿Cuándo empiezas tú?
     </div>
   </div>
@@ -397,62 +504,58 @@
 <!-- ═══════════════════════════════════════
      FAQ
      ═══════════════════════════════════════ -->
-<section id="faq">
+<section id="faq" aria-labelledby="faq-title">
   <div class="section-inner">
-
     <div class="section-header" style="text-align:center;max-width:560px;margin:0 auto 56px">
       <div class="eyebrow reveal" style="justify-content:center">Preguntas frecuentes</div>
-      <h2 class="section-title reveal reveal-delay-1">Resolvemos<br>tus dudas</h2>
+      <h2 class="section-title reveal reveal-delay-1" id="faq-title">Resolvemos<br>tus dudas</h2>
     </div>
-
-    <div class="faq-list">
-      <div class="faq-item reveal">
-        <button class="faq-question" onclick="toggleFaq(this)">¿Realmente entregan la web en 48 horas? <span class="faq-chevron">+</span></button>
+    <div class="faq-list" role="list">
+      <div class="faq-item reveal" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">¿Realmente entregan la web en 48 horas? <span class="faq-chevron" aria-hidden="true">+</span></button>
         <div class="faq-answer">Sí, siempre que tengamos la información de tu negocio lista. Al confirmar el proyecto te enviamos un formulario de onboarding. Con eso en mano, tu web está lista en 48 horas hábiles.</div>
       </div>
-      <div class="faq-item reveal reveal-delay-1">
-        <button class="faq-question" onclick="toggleFaq(this)">¿Cuánto tengo que invertir en publicidad además del plan? <span class="faq-chevron">+</span></button>
+      <div class="faq-item reveal reveal-delay-1" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">¿Cuánto tengo que invertir en publicidad además del plan? <span class="faq-chevron" aria-hidden="true">+</span></button>
         <div class="faq-answer">Recomendamos mínimo S/600–S/800/mes en pauta para ver resultados consistentes. Te ayudamos a definir el presupuesto según tu industria y objetivos en la llamada de diagnóstico.</div>
       </div>
-      <div class="faq-item reveal reveal-delay-2">
-        <button class="faq-question" onclick="toggleFaq(this)">¿Puedo cancelar en cualquier momento? <span class="faq-chevron">+</span></button>
+      <div class="faq-item reveal reveal-delay-2" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">¿Puedo cancelar en cualquier momento? <span class="faq-chevron" aria-hidden="true">+</span></button>
         <div class="faq-answer">Sí. Trabajamos mensualmente sin permanencia mínima. Solo necesitamos 15 días de aviso para cerrar el servicio ordenadamente y entregarte todos tus activos digitales.</div>
       </div>
-      <div class="faq-item reveal reveal-delay-3">
-        <button class="faq-question" onclick="toggleFaq(this)">¿Trabajan con cualquier tipo de negocio? <span class="faq-chevron">+</span></button>
+      <div class="faq-item reveal reveal-delay-3" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">¿Trabajan con cualquier tipo de negocio? <span class="faq-chevron" aria-hidden="true">+</span></button>
         <div class="faq-answer">Trabajamos mejor con restaurantes, clínicas, retail, consultorios, estudios y servicios profesionales. En la llamada de diagnóstico te decimos honestamente si podemos ayudarte.</div>
       </div>
-      <div class="faq-item reveal reveal-delay-4">
-        <button class="faq-question" onclick="toggleFaq(this)">¿Qué pasa si no veo resultados en el primer mes? <span class="faq-chevron">+</span></button>
+      <div class="faq-item reveal reveal-delay-4" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">¿Qué pasa si no veo resultados en el primer mes? <span class="faq-chevron" aria-hidden="true">+</span></button>
         <div class="faq-answer">Hacemos una reunión de revisión al mes 1 y ajustamos la estrategia sin costo adicional. Si al mes 2 seguimos sin resultados claros, te devolvemos el mes y cerramos sin problema.</div>
       </div>
-      <div class="faq-item reveal">
-        <button class="faq-question" onclick="toggleFaq(this)">¿Necesito saber de marketing o tecnología? <span class="faq-chevron">+</span></button>
+      <div class="faq-item reveal" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">¿Necesito saber de marketing o tecnología? <span class="faq-chevron" aria-hidden="true">+</span></button>
         <div class="faq-answer">Para nada. Tú te concentras en atender a tus clientes. Nosotros manejamos todo lo digital: la web, las campañas, los reportes y las optimizaciones. Sin tecnicismos en las reuniones.</div>
       </div>
     </div>
-
   </div>
 </section>
 
 
 <!-- ═══════════════════════════════════════
      CTA FINAL
-     Para cambiar foto: sube images/cta.jpg
-     y reemplaza el src de abajo
-     ═══════════════════════════════════════ -->
-<section id="cta">
+     Foto: cambia src por images/cta.jpg -->
+<section id="cta" aria-label="Llamado a la acción">
   <img
     class="cta-img"
-    src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80&auto=format&fit=crop"
-    alt="Oficina moderna Lima">
+    src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=85&auto=format&fit=crop"
+    alt="Tecnología e inteligencia artificial"
+    loading="lazy">
   <div class="cta-overlay">
     <div class="cta-content reveal">
-      <h2>¿Listo para que tu negocio crezca con IA?</h2>
+      <h2>¿Listo para crecer<br>con <span>inteligencia</span>?</h2>
       <p>Agenda una llamada gratuita de 30 minutos. Sin compromiso. Te decimos exactamente qué necesitas y cuánto cuesta.</p>
       <div class="cta-btns">
         <a href="#contacto" class="btn-white">Agendar llamada gratuita →</a>
-        <a href="https://wa.me/51999999999" target="_blank" class="btn-ghost-white">💬 WhatsApp directo</a>
+        <a href="https://wa.me/51999999999" target="_blank" rel="noopener" class="btn-ghost-teal">💬 WhatsApp directo</a>
       </div>
     </div>
   </div>
@@ -462,24 +565,26 @@
 <!-- ═══════════════════════════════════════
      CONTACTO
      ═══════════════════════════════════════ -->
-<section id="contacto">
+<section id="contacto" aria-labelledby="contacto-title">
   <div class="section-inner">
-
     <div class="section-header">
       <div class="eyebrow reveal">Contacto</div>
-      <h2 class="section-title reveal reveal-delay-1">Hablemos de<br>tu negocio</h2>
-      <p class="section-sub reveal reveal-delay-2">Te respondemos en menos de 2 horas en horario de atención.</p>
+      <h2 class="section-title reveal reveal-delay-1" id="contacto-title">
+        Hablemos de<br>tu negocio
+      </h2>
+      <p class="section-sub reveal reveal-delay-2">
+        Te respondemos en menos de 2 horas en horario de atención.
+      </p>
     </div>
 
     <div class="contacto-grid">
-
-      <form class="reveal" onsubmit="handleSubmit(event)">
-        <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" required></div>
-        <div class="form-group"><label>Empresa / Negocio</label><input type="text" placeholder="Nombre de tu empresa" required></div>
-        <div class="form-group"><label>WhatsApp / Teléfono</label><input type="tel" placeholder="+51 999 999 999" required></div>
+      <form class="reveal" onsubmit="handleSubmit(event)" novalidate>
+        <div class="form-group"><label for="nombre">Nombre completo</label><input id="nombre" type="text" placeholder="Tu nombre" required></div>
+        <div class="form-group"><label for="empresa">Empresa / Negocio</label><input id="empresa" type="text" placeholder="Nombre de tu empresa" required></div>
+        <div class="form-group"><label for="telefono">WhatsApp / Teléfono</label><input id="telefono" type="tel" placeholder="+51 999 999 999" required></div>
         <div class="form-group">
-          <label>Servicio de interés</label>
-          <select required>
+          <label for="servicio">Servicio de interés</label>
+          <select id="servicio" required>
             <option value="" disabled selected>Selecciona una opción</option>
             <option>Web Esencial — 48 horas</option>
             <option>Crecimiento IA — Marketing digital</option>
@@ -487,18 +592,30 @@
             <option>Consulta general</option>
           </select>
         </div>
-        <div class="form-group"><label>Cuéntanos de tu negocio</label><textarea placeholder="¿Qué vendes? ¿Cuál es tu principal reto hoy?"></textarea></div>
+        <div class="form-group"><label for="mensaje">Cuéntanos de tu negocio</label><textarea id="mensaje" placeholder="¿Qué vendes? ¿Cuál es tu principal reto hoy?"></textarea></div>
         <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" id="submit-btn">Enviar consulta →</button>
       </form>
 
       <div class="contact-info reveal reveal-delay-2">
-        <div class="contact-item"><div class="contact-icon">💬</div><div><div class="contact-item-title">WhatsApp</div><div class="contact-item-val">+51 999 999 999<br>Respuesta en menos de 1 hora</div></div></div>
-        <div class="contact-item"><div class="contact-icon">📧</div><div><div class="contact-item-title">Email</div><div class="contact-item-val">hola@YourGrowPartneria.pe<br>Respuesta el mismo día</div></div></div>
-        <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-item-title">Ubicación</div><div class="contact-item-val">Lima, Perú<br>Atendemos a todo el país de forma remota</div></div></div>
-        <div class="contact-item"><div class="contact-icon">🕐</div><div><div class="contact-item-title">Horario de atención</div><div class="contact-item-val">Lunes a viernes: 9am – 7pm<br>Sábados: 9am – 1pm</div></div></div>
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">💬</div>
+          <div><div class="contact-item-title">WhatsApp</div><div class="contact-item-val">+51 999 999 999<br>Respuesta en menos de 1 hora</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">📧</div>
+          <div><div class="contact-item-title">Email</div><div class="contact-item-val">hola@nexoia.pe<br>Respuesta el mismo día</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">📍</div>
+          <div><div class="contact-item-title">Ubicación</div><div class="contact-item-val">Lima, Perú<br>Atendemos a todo el país de forma remota</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">🕐</div>
+          <div><div class="contact-item-title">Horario de atención</div><div class="contact-item-val">Lunes a viernes: 9am – 7pm<br>Sábados: 9am – 1pm</div></div>
+        </div>
       </div>
-
     </div>
+
   </div>
 </section>
 
@@ -506,16 +623,48 @@
 <!-- ═══════════════════════════════════════
      FOOTER
      ═══════════════════════════════════════ -->
-<footer>
-  <div class="footer-logo">YourGrowPartner<span>IA</span></div>
-  <ul class="footer-links">
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#proceso">Proceso</a></li>
-    <li><a href="#planes">Planes</a></li>
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-  <div class="footer-copy">© 2025 YourGrowPartnerIA · Lima, Perú · Todos los derechos reservados</div>
+<footer role="contentinfo">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#inicio" class="footer-logo">Nexo<span>IA</span></a>
+      <p class="footer-desc">Agencia de marketing digital y automatización con IA en Lima, Perú. Resultados medibles desde el primer mes.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Web con IA en 48h</a></li>
+          <li><a href="#servicios">Agencia de crecimiento IA</a></li>
+          <li><a href="#servicios">Automatización enterprise</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#proceso">Cómo trabajamos</a></li>
+          <li><a href="#nosotros">Quiénes somos</a></li>
+          <li><a href="#planes">Planes y precios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://wa.me/51999999999" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:hola@nexoia.pe">hola@nexoia.pe</a></li>
+          <li><a href="https://instagram.com/nexoia" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://linkedin.com/company/nexoia" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 NexoIA · Lima, Perú · Todos los derechos reservados</p>
+    <div class="footer-legal">
+      <a href="#">Política de privacidad</a>
+      <a href="#">Términos de uso</a>
+    </div>
+  </div>
 </footer>
 
 
