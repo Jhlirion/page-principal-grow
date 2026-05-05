@@ -397,38 +397,120 @@ section { padding: 112px 80px; }
 
 /* ── 11. SERVICIOS ── */
 #servicios { background: var(--bg); padding-top: 0; }
-.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
 .card-service {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 12px; padding: 36px 30px;
-  display: flex; flex-direction: column;
   position: relative; overflow: hidden;
-  transition: border-color 0.3s, transform 0.3s cubic-bezier(.22,.68,0,1.2), box-shadow 0.3s;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  min-height: 520px;
+  display: flex; flex-direction: column;
+  transition: transform 0.35s cubic-bezier(.22,.68,0,1.2),
+              box-shadow 0.35s, border-color 0.35s;
+  cursor: default;
 }
-.card-service::before {
-  content: ''; position: absolute; top: 0; left: 0;
-  width: 220px; height: 220px;
-  background: radial-gradient(circle, var(--teal-dim) 0%, transparent 70%);
-  opacity: 0; transition: opacity 0.4s; pointer-events: none;
+.card-service:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,229,160,0.3);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.55), 0 0 50px rgba(0,229,160,0.07);
 }
-.card-service::after {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--teal), transparent);
-  transform: scaleX(0); transition: transform 0.4s;
+
+/* Imagen de fondo espacial — cada card tiene su propio gas/nebulosa */
+.card-service-bg {
+  position: absolute; inset: 0; z-index: 0;
 }
-.card-service:hover { border-color: var(--teal-border); transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(0,229,160,0.05); }
-.card-service:hover::before { opacity: 1; }
-.card-service:hover::after  { transform: scaleX(1); }
-.card-num  { font-size: 10px; font-weight: 600; color: var(--text-3); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 20px; }
-.card-icon { width: 48px; height: 48px; background: var(--teal-dim); border: 1px solid var(--teal-border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 20px; transition: background 0.2s, box-shadow 0.2s; }
-.card-service:hover .card-icon { background: var(--teal-mid); box-shadow: 0 0 20px var(--teal-glow); }
-.card-desc { font-size: 14px; color: var(--text-2); line-height: 1.7; margin-bottom: 24px; }
-.card-features { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; flex: 1; }
-.card-features li { font-size: 13px; color: var(--text-2); display: flex; align-items: flex-start; gap: 10px; line-height: 1.45; }
-.card-features li::before { content: ''; width: 4px; height: 4px; background: var(--teal); border-radius: 50%; flex-shrink: 0; margin-top: 7px; box-shadow: 0 0 6px var(--teal); }
-.card-price  { border-top: 1px solid var(--border); padding-top: 18px; display: flex; align-items: baseline; gap: 4px; }
+.card-service-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+  transition: transform 0.7s ease;
+}
+.card-service:hover .card-service-bg img { transform: scale(1.06); }
+
+/* Overlay: oscuro denso abajo para legibilidad del texto */
+.card-service-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(8,8,9,0.25) 0%,
+      rgba(8,8,9,0.55) 45%,
+      rgba(8,8,9,0.92) 100%);
+}
+
+/* Tint de color único por card */
+.card-service:nth-child(1) .card-service-bg::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(ellipse 80% 60% at 30% 20%, rgba(88,40,220,0.45) 0%, transparent 70%);
+}
+.card-service:nth-child(2) .card-service-bg::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(0,160,255,0.4) 0%, transparent 70%);
+}
+.card-service:nth-child(3) .card-service-bg::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(ellipse 80% 60% at 50% 15%, rgba(0,200,140,0.4) 0%, transparent 70%);
+}
+
+/* Contenido sobre la imagen */
+.card-content {
+  position: relative; z-index: 2;
+  padding: 32px 30px 30px;
+  display: flex; flex-direction: column;
+  height: 100%;
+}
+
+.card-num {
+  font-size: 10px; font-weight: 600; color: rgba(240,238,232,0.4);
+  letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 16px;
+}
+
+/* Badge de servicio reemplaza el ícono */
+.card-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(8px);
+  border-radius: 50px; padding: 5px 14px;
+  font-size: 12px; font-weight: 500; color: rgba(240,238,232,0.7);
+  margin-bottom: 24px; width: fit-content;
+}
+.card-badge-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--teal); box-shadow: 0 0 6px var(--teal);
+}
+
+h3.card-title {
+  font-weight: 700; font-size: 21px;
+  letter-spacing: -0.5px; margin-bottom: 12px;
+  color: var(--text); line-height: 1.15;
+}
+.card-desc {
+  font-size: 14px; color: rgba(240,238,232,0.6);
+  line-height: 1.7; margin-bottom: 24px;
+}
+.card-features {
+  list-style: none; display: flex; flex-direction: column;
+  gap: 9px; margin-bottom: 28px; flex: 1;
+}
+.card-features li {
+  font-size: 13px; color: rgba(240,238,232,0.55);
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.45;
+}
+.card-features li::before {
+  content: ''; width: 4px; height: 4px;
+  background: var(--teal); border-radius: 50%;
+  flex-shrink: 0; margin-top: 7px;
+  box-shadow: 0 0 6px var(--teal);
+}
+
+/* Precio al fondo de la card */
+.card-price {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 18px; display: flex; align-items: baseline; gap: 4px;
+}
 .price-num   { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; color: var(--teal); }
-.price-label { font-size: 12px; color: var(--text-3); }
+.price-label { font-size: 12px; color: rgba(240,238,232,0.35); }
 
 /* ── 12. BANNER DE IMAGEN ── */
 .img-banner { width: 100%; height: 400px; overflow: hidden; position: relative; }
@@ -555,6 +637,65 @@ footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 
 .footer-legal  { display: flex; gap: 24px; }
 .footer-legal a { font-size: 12px; color: var(--text-3); text-decoration: none; transition: color 0.2s; }
 .footer-legal a:hover { color: var(--text-2); }
+
+
+/* ── WHATSAPP FLOTANTE ── */
+.wa-float {
+  position: fixed; bottom: 28px; right: 28px; z-index: 999;
+  display: flex; align-items: center; gap: 0;
+  text-decoration: none;
+  filter: drop-shadow(0 8px 24px rgba(37,211,102,0.4));
+  transition: filter 0.25s, transform 0.25s;
+}
+.wa-float:hover {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 12px 32px rgba(37,211,102,0.6));
+}
+
+/* Burbuja de texto que se expande */
+.wa-label {
+  background: #25D366;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 600;
+  padding: 0 18px 0 20px;
+  height: 52px; line-height: 52px;
+  border-radius: 26px 0 0 26px;
+  white-space: nowrap;
+  max-width: 0; overflow: hidden;
+  transition: max-width 0.4s cubic-bezier(.22,.68,0,1.2), padding 0.3s;
+  letter-spacing: 0.01em;
+}
+.wa-float:hover .wa-label {
+  max-width: 160px;
+  padding: 0 18px 0 20px;
+}
+
+/* Círculo con ícono WA */
+.wa-icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.wa-icon svg {
+  width: 26px; height: 26px; fill: #fff;
+}
+
+/* Pulso animado de fondo */
+.wa-float::before {
+  content: ''; position: absolute;
+  right: 0; bottom: 0;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(37,211,102,0.35);
+  animation: wa-pulse 2.5s ease-out infinite;
+  z-index: -1;
+}
+@keyframes wa-pulse {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  70%  { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
 
 /* ── 21. RESPONSIVE ── */
 @media (max-width: 1020px) {
