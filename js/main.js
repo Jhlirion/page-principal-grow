@@ -1,5 +1,5 @@
 /* ============================================================
-   NexoIA — JavaScript principal
+   YourGrowPartner IA — JavaScript principal
    ============================================================
    1. Scroll Reveal
    2. Navbar sombra al hacer scroll
